@@ -1,4 +1,4 @@
-//PUT /api/user/{userId}/section/{section}/mark
+//PUT /api/user/{userId}/section/{sectionId}/mark
 {
   "videoTimestamp": 36.235435
 }

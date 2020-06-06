@@ -5,15 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Topic {
-    String topicId;
-    String title;
-    String color;
-    Long begin;
-    Long end;
-    String sectionId;
+public class ListOf<T> {
+    List<T> list;
 }

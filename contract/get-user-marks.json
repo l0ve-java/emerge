@@ -1,4 +1,4 @@
-//GET /api/user/{userId}/section/{section}/marks
+//GET /api/user/{userId}/section/{sectionId}/marks
 // 200 OK
 {
   "marks": [

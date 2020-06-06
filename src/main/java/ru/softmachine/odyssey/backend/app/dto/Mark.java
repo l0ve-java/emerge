@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Mark {
     String markId;
+    String sectionId;
+    String userId;
     Long videoTimestamp;
     Topic topic;
 }

@@ -1,13 +1,13 @@
 {
-  "users": [
+  "list": [
     {
-      "id": "alice",
+      "userId": "alice",
       "name": "Alice Wonderland",
       "pic": "https://randomuser.me/api/portraits/women/39.jpg",
       "email": "alice@gmail.com"
     },
     {
-      "id": "kirk",
+      "userId": "kirk",
       "name": "Kirk Kostner",
       "pic": "https://randomuser.me/api/portraits/men/39.jpg",
       "email": "kirk@gmail.com"
