@@ -73,6 +73,7 @@ public class MarkService {
         final Optional<Mark> existingMark = allMarks.stream()
                 .filter(m ->
                         m.getSectionId().equals(newMark.getSectionId())
+                                && m.getTopic().getTopicId().equals(newMark.getTopic().getTopicId())
                                 && m.getUserId().equals(newMark.getUserId()))
                 .findAny();
 
