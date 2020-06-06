@@ -1,4 +1,4 @@
-//GET /api/recomendations?userId=alice@gmail.com&sectionId=1234
+//GET /api/recommendations?userId=alice@gmail.com&sectionId=1234
 // 200 OK
 {
   "users": [
