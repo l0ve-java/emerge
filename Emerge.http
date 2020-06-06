@@ -1,0 +1,27 @@
+GET http://127.0.0.1:5000/api/users?id=kirk,alice
+
+<> 2020-06-06T034704.200.json
+<> 2020-06-06T034701.200.json
+<> 2020-06-06T021354.200.json
+
+###
+
+GET http://127.0.0.1:5000/api/user/alice/section/tacha/marks
+
+<> 2020-06-06T041513.200.json
+<> 2020-06-06T041407.200.json
+
+###
+
+PUT http://127.0.0.1:5000/api/user/alice/section/tacha/mark
+Content-Type: application/json
+
+{
+  "videoTimestamp": 80
+}
+
+<> 2020-06-06T041507.200.json
+<> 2020-06-06T041449.200.json
+
+###
+
