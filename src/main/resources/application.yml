@@ -1,0 +1,12 @@
+spring:
+  jackson:
+    default-property-inclusion: non_null
+server:
+  port: 5000
+  error:
+    whitelabel:
+      enabled: false
+management:
+  endpoints:
+    web:
+      base-path: /monitoring

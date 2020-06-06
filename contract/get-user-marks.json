@@ -3,14 +3,26 @@
 {
   "marks": [
     {
-      "begin": 15.0,
-      "end": 45.0,
-      "color": "#FF5733"
+      "markId": "uuid",
+      "videoTimestamp": 36.235435,
+      "topic": {
+        "topicId": "uuid",
+        "begin": 15.0,
+        "end": 45.0,
+        "color": "#FF5733",
+        "title": "London is the capital of Great Britain"
+      }
     },
     {
-      "begin": 60.0,
-      "end": 90.0,
-      "color": "#DDFF33"
+      "markId": "uuid",
+      "videoTimestamp": 71.1,
+      "topic": {
+        "topicId": "uuid",
+        "begin": 60.0,
+        "end": 90.0,
+        "color": "#DDFF33",
+        "title": "Object-oriented programming"
+      }
     }
   ]
 }
