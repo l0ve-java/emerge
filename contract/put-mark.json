@@ -1,6 +1,13 @@
-//PUT /api/mark?userId=alice@gmail.com&sectionId=1234
+//PUT /api/user/{userId}/section/{section}/mark
 {
-  "video-timestamp": "0:12:06"
+  "video-timestamp": 36.235435
 }
 
-// 204 OK
+// 200 OK
+{
+  "mark": {
+    "begin": 15.0,
+    "end": 45.0,
+    "color": "#FF5733"
+  }
+}

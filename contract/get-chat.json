@@ -1,10 +1,15 @@
-//GET /api/chat?id=723
+//GET /api/chat?id=723,572
 // 200 OK
 {
   "chats": [
     {
       "id": "723",
       "topic": "Китайские иероглифы",
+      "users": ["alice@gmail.com, bob@gmail.com"]
+    },
+    {
+      "id": "572",
+      "topic": "Произношение У",
       "users": ["alice@gmail.com, bob@gmail.com"]
     }
   ]

@@ -1,0 +1,11 @@
+//POST /api/login
+{
+  "email": "alice@gmail.com"
+}
+
+// 200 OK
+{
+  "userId": "alice"
+}
+
+// 404 NOT FOUND

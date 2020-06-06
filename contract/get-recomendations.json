@@ -3,11 +3,11 @@
 {
   "users": [
     {
-      "id": "bob@gmail.com",
+      "id": "bob",
       "rating": 2354
     },
     {
-      "id": "kirk@gmail.com",
+      "id": "kirk",
       "rating": 1632
     }
   ],

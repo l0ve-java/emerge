@@ -1,0 +1,16 @@
+//GET /api/users?id=alice,kirk
+// 200 OK
+{
+  "users": [
+    {
+      "id": "alice",
+      "name": "Alice Wonderland",
+      "pic": "https://randomuser.me/api/portraits/women/39.jpg"
+    },
+    {
+      "id": "kirk",
+      "name": "Kirk Kostner",
+      "pic": "https://randomuser.me/api/portraits/men/39.jpg"
+    }
+  ]
+}
