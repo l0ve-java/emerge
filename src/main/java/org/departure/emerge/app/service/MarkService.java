@@ -67,7 +67,8 @@ public class MarkService {
                 .videoTimestamp(videoTs)
                 .build();
 
-        topicService.getTopicForMark(newMark).ifPresent(newMark::setTopic);
+        final Optional<Topic> topic = topicService.getTopicForMark(newMark);
+        newMark.setTopic(topic.orElseThrow(() -> new IllegalStateException("Cannot resolve topic")));
 
         final Optional<Mark> existingMark = allMarks.stream()
                 .filter(m ->
