@@ -1,11 +1,8 @@
-//POST /api/login
+//GET /api/login/{ticket}
+// 200 OK,
 {
-  "email": "alice@gmail.com"
+  "userId": "1fbe8c70-5086-4744-9799-f9dbd4896817",
+  "name": "Касимов Антип",
+  "pic": "https://randomuser.me/api/portraits/men/29.jpg",
+  "ticket": "2345"
 }
-
-// 200 OK
-{
-  "userId": "alice"
-}
-
-// 404 NOT FOUND
