@@ -42,10 +42,13 @@ public class RecommendationsService {
         final List<Mark> sectionMarks = markService.getMarks(sectionId);
         final Map<String, Double> sectionRatings = getRating(sectionMarks);
 
-        final ArrayList<Topic> userTopics = new ArrayList<>(markService.getMarks(userId, sectionId)
+        final List<Mark> userMarks = markService.getMarks(userId, sectionId);
+        final ArrayList<Topic> userTopics = new ArrayList<>(userMarks
                 .stream().map(Mark::getTopic)
                 .collect(Collectors.toMap(Topic::getTopicId, Functions.identity(), (a, b) -> a))
                 .values());
+        final Map<String, List<Mark>> userMarksForTopics = userMarks.stream()
+                .collect(Collectors.groupingBy(m -> m.getTopic().getTopicId(), Collectors.mapping(this::cloneWithoutTopic, Collectors.toList())));
 
         final Map<String, Topic> allTopics = allMarks.stream()
                 .map(Mark::getTopic)
@@ -70,6 +73,7 @@ public class RecommendationsService {
                 recommendations.getTopics().add(
                         RecommendedTopic.builder()
                                 .topic(allTopics.get(key))
+                                .userMarks(userMarksForTopics.get(key))
                                 .rating(value)
                                 .markCount(getMarkCount(allMarks, key))
                                 .build()));
@@ -93,5 +97,9 @@ public class RecommendationsService {
     private void addRating(Map<String, Double> rating, String topicId, Double rate) {
         rating.putIfAbsent(topicId, 0d);
         rating.computeIfPresent(topicId, (k, v) -> v + rate);
+    }
+
+    private Mark cloneWithoutTopic(Mark mark) {
+        return mark.toBuilder().topic(null).build();
     }
 }
