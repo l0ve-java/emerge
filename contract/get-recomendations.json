@@ -1,0 +1,24 @@
+//GET /api/recomendations?userId=alice@gmail.com&sectionId=1234
+// 200 OK
+{
+  "users": [
+    {
+      "id": "bob@gmail.com",
+      "rating": 2354
+    },
+    {
+      "id": "kirk@gmail.com",
+      "rating": 1632
+    }
+  ],
+  "chats": [
+    {
+      "id": "734",
+      "rating": 5342
+    },
+    {
+      "id": "1253",
+      "rating": 349
+    }
+  ]
+}

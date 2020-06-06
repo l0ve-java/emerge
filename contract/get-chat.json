@@ -1,0 +1,12 @@
+//GET /api/chat?id=723
+// 200 OK
+{
+  "chats": [
+    {
+      "id": "723",
+      "topic": "Китайские иероглифы",
+      "users": ["alice@gmail.com, bob@gmail.com"]
+    }
+  ]
+}
+
