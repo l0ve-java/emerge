@@ -19,3 +19,15 @@ Content-Type: application/json
   "userCoef": 2,
   "userWeight": 0.1
 }
+
+###
+GET http://departure-emerge.eu-central-1.elasticbeanstalk.com/api/user/bob/section/tacha/recommendations
+
+###
+PUT http://departure-emerge.eu-central-1.elasticbeanstalk.com/api/user/bob/section/tacha/mark
+Content-Type: application/json
+
+{
+  "videoTimestamp": 230
+}
+

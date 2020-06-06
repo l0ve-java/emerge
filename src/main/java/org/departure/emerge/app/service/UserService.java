@@ -12,10 +12,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,7 @@ public class UserService {
     };
 
     private final ObjectMapper objectMapper;
+    private final NamesService namesService;
 
     @Value("classpath:/users.json")
     private Resource usersResource;
@@ -36,7 +38,7 @@ public class UserService {
     @SneakyThrows
     public void initialize() {
         final ListOf<User> data = objectMapper.readValue(usersResource.getURL(), LIST_USER);
-        allUsers = data.getList().stream().collect(Collectors.toMap(User::getUserId, Function.identity()));
+        allUsers = Collections.synchronizedMap(data.getList().stream().collect(Collectors.toMap(User::getUserId, Function.identity())));
     }
 
     public List<User> getUsersById(List<String> ids) {
@@ -50,8 +52,27 @@ public class UserService {
         return allUsers.get(id);
     }
 
-    public List<User> getAllUsers() {
-        return new ArrayList<>(allUsers.values());
+    public User getUserByTicket(String ticket) {
+        final Optional<User> user = allUsers.values().stream()
+                .filter(u -> ticket.equals(u.getTicket()))
+                .findFirst();
+        final User result;
+        if (user.isEmpty()) {
+            final User newUser = createUser(ticket);
+            allUsers.put(newUser.getUserId(), newUser);
+            result = newUser;
+        } else {
+            result = user.get();
+        }
+
+        return result;
+    }
+
+    private User createUser(String ticket) {
+        final User user = namesService.getRandomPerson();
+        user.setTicket(ticket);
+        user.setUserId(UUID.randomUUID().toString());
+        return user;
     }
 
 }
