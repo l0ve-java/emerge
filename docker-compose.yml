@@ -1,0 +1,31 @@
+version: '3'
+services:
+  odyssey_place_service:
+    build: .
+    container_name: odyssey-place-service
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://db:27017/place
+  db:
+    container_name: odyssey-place-mongo
+    image: mongo:4.2.1-bionic
+    environment:
+      - MONGO_INITDB_DATABASE=place
+    ports:
+      - 27017:27017
+  wait_for_db:
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - db
+    command: db:27017
+  import_data:
+    image: mongo:4.2.1-bionic
+    volumes:
+      - ./db-test-data:/db
+    depends_on:
+      - wait_for_db
+    working_dir: /db
+    command: /db/import-data.sh db 27017

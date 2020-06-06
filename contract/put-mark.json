@@ -1,13 +1,19 @@
 //PUT /api/user/{userId}/section/{section}/mark
 {
-  "video-timestamp": 36.235435
+  "videoTimestamp": 36.235435
 }
 
 // 200 OK
 {
   "mark": {
-    "begin": 15.0,
-    "end": 45.0,
-    "color": "#FF5733"
+    "markId": "uuid",
+    "videoTimestamp": 36.235435,
+    "topic": {
+      "topicId": "uuid",
+      "begin": 15.0,
+      "end": 45.0,
+      "color": "#FF5733",
+      "title": "London is the capital of Great Britain"
+    }
   }
 }
