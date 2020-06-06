@@ -41,8 +41,9 @@ GET http://127.0.0.1:5000/api/user/alice/section/tacha/recommendations
 GET http://departure-emerge.eu-central-1.elasticbeanstalk.com/api/user/alice/section/tacha/recommendations
 
 ###
-
 GET http://127.0.0.1:5000/api/login/2345
 
 ###
+GET http://departure-emerge.eu-central-1.elasticbeanstalk.com/api/login/666
 
+###
