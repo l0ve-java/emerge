@@ -37,7 +37,7 @@ public class RecommendationsService {
 
     public Recommendations getRecommendations(String userId, String sectionId) {
         final List<Mark> allMarks = markService.getAllMarks();
-        final Map<String, Double> allRatings = getRating(allMarks);
+        final Map<String, Double> allTopicRatings = getRating(allMarks);
 
         final List<Mark> sectionMarks = markService.getMarks(sectionId);
         final Map<String, Double> sectionRatings = getRating(sectionMarks);
@@ -52,12 +52,16 @@ public class RecommendationsService {
                 .collect(Collectors.toMap(Topic::getTopicId, Functions.identity(), (a, b) -> a));
 
         final HashMap<String, Double> resultRating = new HashMap<>();
-        allRatings.forEach((key, value) -> addRating(resultRating, key, value * allCoef));
-        sectionRatings.forEach((key, value) -> addRating(resultRating, key, value * sectionCoef));
+//        allTopicRatings.forEach((key, value) -> addRating(resultRating, key, value * allCoef));
+//        sectionRatings.forEach((key, value) -> addRating(resultRating, key, value * sectionCoef));
         userTopics.forEach(topic -> {
             final String topicId = topic.getTopicId();
-            final Double rate = sectionRatings.get(topicId);
-            addRating(resultRating, topicId, rate * userCoef);
+            final Double topicRate = allTopicRatings.get(topicId);
+            final Double sectionRate = sectionRatings.get(topicId);
+            final Double userRate = sectionRatings.get(topicId);
+            addRating(resultRating, topicId, topicRate * allCoef);
+            addRating(resultRating, topicId, sectionRate * sectionCoef);
+            addRating(resultRating, topicId, userRate * userCoef);
             addRating(resultRating, topicId, userWeight);
         });
 
@@ -67,6 +71,7 @@ public class RecommendationsService {
                         RecommendedTopic.builder()
                                 .topic(allTopics.get(key))
                                 .rating(value)
+                                .markCount(getMarkCount(allMarks, key))
                                 .build()));
         recommendations.getTopics().sort(Comparator.comparing(t -> -t.getRating()));
         return recommendations;
@@ -77,6 +82,12 @@ public class RecommendationsService {
                 .collect(Collectors.groupingBy(m -> m.getTopic().getTopicId(), Collectors.counting()));
         return countMap.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> (double) (e.getValue()) / marks.size()));
+    }
+
+    private Long getMarkCount(List<Mark> marks, String topicId) {
+        return marks.stream()
+                .filter(m -> topicId.equals(m.getTopic().getTopicId()))
+                .count();
     }
 
     private void addRating(Map<String, Double> rating, String topicId, Double rate) {
