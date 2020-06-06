@@ -1,4 +1,4 @@
-package ru.softmachine.odyssey.backend.app.dto;
+package org.departure.emerge.app.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Mark {
-    String markId;
-    String sectionId;
-    String userId;
-    Long videoTimestamp;
+public class RecommendedTopic {
     Topic topic;
+    Double rating;
 }

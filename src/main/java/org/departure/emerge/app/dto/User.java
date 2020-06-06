@@ -1,4 +1,4 @@
-package ru.softmachine.odyssey.backend.app.dto;
+package org.departure.emerge.app.dto;
 
 import lombok.Data;
 

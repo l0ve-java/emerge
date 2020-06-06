@@ -11,6 +11,12 @@
       "name": "Kirk Kostner",
       "pic": "https://randomuser.me/api/portraits/men/39.jpg",
       "email": "kirk@gmail.com"
+    },
+    {
+      "userId": "eurich",
+      "name": "Tasha Eurich",
+      "pic": "https://randomuser.me/api/portraits/women/10.jpg",
+      "email": "eurich@gmail.com"
     }
   ]
 }

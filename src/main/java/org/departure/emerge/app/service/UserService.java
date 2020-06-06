@@ -1,17 +1,18 @@
-package ru.softmachine.odyssey.backend.app.service;
+package org.departure.emerge.app.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.collections4.CollectionUtils;
+import org.departure.emerge.app.dto.ListOf;
+import org.departure.emerge.app.dto.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import ru.softmachine.odyssey.backend.app.dto.ListOf;
-import ru.softmachine.odyssey.backend.app.dto.User;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,14 @@ public class UserService {
             return Collections.emptyList();
         }
         return ids.stream().map(allUsers::get).collect(Collectors.toList());
+    }
+
+    public User getUserById(String id) {
+        return allUsers.get(id);
+    }
+
+    public List<User> getAllUsers() {
+        return new ArrayList<>(allUsers.values());
     }
 
 }

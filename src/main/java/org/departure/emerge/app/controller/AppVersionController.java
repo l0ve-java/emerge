@@ -1,4 +1,4 @@
-package ru.softmachine.odyssey.backend.app.controller;
+package org.departure.emerge.app.controller;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

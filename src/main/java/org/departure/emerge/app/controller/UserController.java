@@ -1,11 +1,11 @@
-package ru.softmachine.odyssey.backend.app.controller;
+package org.departure.emerge.app.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.departure.emerge.app.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.softmachine.odyssey.backend.app.dto.response.GetUsersResponse;
-import ru.softmachine.odyssey.backend.app.service.UserService;
+import org.departure.emerge.app.dto.response.GetUsersResponse;
 
 import java.util.List;
 

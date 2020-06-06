@@ -1,4 +1,4 @@
-package ru.softmachine.odyssey.backend.app;
+package org.departure.emerge.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

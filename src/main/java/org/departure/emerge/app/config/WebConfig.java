@@ -1,4 +1,4 @@
-package ru.softmachine.odyssey.backend.app.config;
+package org.departure.emerge.app.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.Formatter;

@@ -1,8 +1,8 @@
-package ru.softmachine.odyssey.backend.app.service;
+package org.departure.emerge.app.service;
 
 import lombok.RequiredArgsConstructor;
+import org.departure.emerge.app.dto.Mark;
 import org.springframework.stereotype.Service;
-import ru.softmachine.odyssey.backend.app.dto.Mark;
 
 import java.util.ArrayList;
 import java.util.List;

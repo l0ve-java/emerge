@@ -1,10 +1,10 @@
-package ru.softmachine.odyssey.backend.app.dto.response;
+package org.departure.emerge.app.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.softmachine.odyssey.backend.app.dto.Mark;
+import org.departure.emerge.app.dto.Mark;
 
 import java.util.List;
 

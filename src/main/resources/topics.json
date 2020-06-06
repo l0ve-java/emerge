@@ -5,14 +5,24 @@
       "begin": 15.0,
       "end": 45.0,
       "color": "#FF5733",
-      "title": "London is the capital of Great Britain"
+      "title": "London is the capital of Great Britain",
+      "authorId": "eurich"
     },
     {
       "topicId": "2",
       "begin": 60.0,
       "end": 90.0,
       "color": "#DDFF33",
-      "title": "Object-oriented programming"
+      "title": "Object-oriented programming",
+      "authorId": "eurich"
     }
   ]
 }
+
+//String topicId;
+//String title;
+//User author;
+//String color;
+//Long begin;
+//Long end;
+//String sectionId;

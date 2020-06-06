@@ -1,4 +1,4 @@
-package ru.softmachine.odyssey.backend.app.config;
+package org.departure.emerge.app.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;

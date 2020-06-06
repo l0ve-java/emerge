@@ -5,6 +5,9 @@ GET http://127.0.0.1:5000/api/users?id=kirk,alice
 <> 2020-06-06T021354.200.json
 
 ###
+GET http://departure-emerge.eu-central-1.elasticbeanstalk.com/api/user/alice/section/tacha/marks
+
+###
 
 GET http://127.0.0.1:5000/api/user/alice/section/tacha/marks
 
@@ -22,6 +25,17 @@ Content-Type: application/json
 
 <> 2020-06-06T041507.200.json
 <> 2020-06-06T041449.200.json
+
+###
+PUT http://departure-emerge.eu-central-1.elasticbeanstalk.com/api/user/alice/section/tacha/mark
+Content-Type: application/json
+
+{
+  "videoTimestamp": 80
+}
+
+###
+GET http://127.0.0.1:5000/api/user/alice/section/tacha/recommendations
 
 ###
 

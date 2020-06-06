@@ -1,10 +1,9 @@
-package ru.softmachine.odyssey.backend.app.dto.response;
+package org.departure.emerge.app.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.softmachine.odyssey.backend.app.dto.User;
 
 import java.util.List;
 
@@ -12,6 +11,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetUsersResponse {
-    List<User> users;
+public class ListOf<T> {
+    List<T> list;
 }

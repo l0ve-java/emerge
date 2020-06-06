@@ -1,4 +1,4 @@
-package ru.softmachine.odyssey.backend.app.controller;
+package org.departure.emerge.app.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.softmachine.odyssey.backend.app.dto.Mark;
-import ru.softmachine.odyssey.backend.app.dto.response.GetUserMarksResponse;
-import ru.softmachine.odyssey.backend.app.dto.response.PutMarkResponse;
-import ru.softmachine.odyssey.backend.app.service.MarkService;
+import org.departure.emerge.app.dto.Mark;
+import org.departure.emerge.app.dto.response.GetUserMarksResponse;
+import org.departure.emerge.app.dto.response.PutMarkResponse;
+import org.departure.emerge.app.service.MarkService;
 
 @RestController()
 @RequiredArgsConstructor
