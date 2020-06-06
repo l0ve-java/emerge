@@ -1,0 +1,21 @@
+PUT http://127.0.0.1:5000/api/user/alice/section/tacha/mark
+Content-Type: application/json
+
+{
+  "videoTimestamp": 230
+}
+
+###
+GET http://127.0.0.1:5000/api/user/alice/section/tacha/recommendations
+
+
+###
+POST http://127.0.0.1:5000/api/coeff
+Content-Type: application/json
+
+{
+  "allCoef": 0.5,
+  "sectionCoef": 0.5,
+  "userCoef": 2,
+  "userWeight": 0.1
+}

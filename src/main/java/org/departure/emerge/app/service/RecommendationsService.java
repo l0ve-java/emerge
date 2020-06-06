@@ -1,54 +1,86 @@
 package org.departure.emerge.app.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Functions;
 import lombok.RequiredArgsConstructor;
+import org.departure.emerge.app.dto.Coeff;
+import org.departure.emerge.app.dto.Mark;
 import org.departure.emerge.app.dto.Recommendations;
 import org.departure.emerge.app.dto.RecommendedTopic;
-import org.departure.emerge.app.dto.RecommendedUser;
 import org.departure.emerge.app.dto.Topic;
-import org.departure.emerge.app.dto.User;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class RecommendationsService {
-    private final ObjectMapper objectMapper;
+    private Double allCoef = 0.5;
+    private Double sectionCoef = 0.5;
+    private Double userCoef = 2d;
+    private Double userWeight = 0.1d;
+
+    private final MarkService markService;
     private final TopicService topicService;
     private final UserService userService;
 
+    public void setCoef(Coeff coef) {
+        allCoef = coef.getAllCoef();
+        sectionCoef = coef.getSectionCoef();
+        userCoef = coef.getUserCoef();
+        userWeight = coef.getUserWeight();
+    }
 
-//    @PostConstruct
-//    @SneakyThrows
-//    public void initialize() {
-//        final ListOf<User> data = objectMapper.readValue(usersResource.getURL(), LIST_USER);
-//        allUsers = data.getList().stream().collect(Collectors.toMap(User::getUserId, Function.identity()));
-//    }
+    public Recommendations getRecommendations(String userId, String sectionId) {
+        final List<Mark> allMarks = markService.getAllMarks();
+        final Map<String, Double> allRatings = getRating(allMarks);
 
-    public Recommendations getRecommendations(String userId) {
+        final List<Mark> sectionMarks = markService.getMarks(sectionId);
+        final Map<String, Double> sectionRatings = getRating(sectionMarks);
+
+        final ArrayList<Topic> userTopics = new ArrayList<>(markService.getMarks(userId, sectionId)
+                .stream().map(Mark::getTopic)
+                .collect(Collectors.toMap(Topic::getTopicId, Functions.identity(), (a, b) -> a))
+                .values());
+
+        final Map<String, Topic> allTopics = allMarks.stream()
+                .map(Mark::getTopic)
+                .collect(Collectors.toMap(Topic::getTopicId, Functions.identity(), (a, b) -> a));
+
+        final HashMap<String, Double> resultRating = new HashMap<>();
+        allRatings.forEach((key, value) -> addRating(resultRating, key, value * allCoef));
+        sectionRatings.forEach((key, value) -> addRating(resultRating, key, value * sectionCoef));
+        userTopics.forEach(topic -> {
+            final String topicId = topic.getTopicId();
+            final Double rate = sectionRatings.get(topicId);
+            addRating(resultRating, topicId, rate * userCoef);
+            addRating(resultRating, topicId, userWeight);
+        });
+
         final Recommendations recommendations = new Recommendations();
-        final List<Topic> allTopics = topicService.getAllTopics();
-        for (int i = 0; i < allTopics.size(); i++) {
-            final Topic topic = allTopics.get(i);
-            recommendations.getTopics().add(
-                    RecommendedTopic.builder()
-                            .topic(topic)
-                            .rating((double) (100 - i))
-                            .build());
-        }
-        final List<User> allUsers = userService.getAllUsers();
-        for (int i = 0; i < allUsers.size(); i++) {
-            final User user = allUsers.get(i);
-            if (!user.getUserId().equals(userId)) {
-                recommendations.getUsers().add(
-                        RecommendedUser.builder()
-                                .user(user)
-                                .rating((double) (100 - i))
-                                .build());
-            }
-        }
+        resultRating.forEach((key, value) ->
+                recommendations.getTopics().add(
+                        RecommendedTopic.builder()
+                                .topic(allTopics.get(key))
+                                .rating(value)
+                                .build()));
+        recommendations.getTopics().sort(Comparator.comparing(t -> -t.getRating()));
         return recommendations;
     }
 
+    private Map<String, Double> getRating(List<Mark> marks) {
+        final Map<String, Long> countMap = marks.stream()
+                .collect(Collectors.groupingBy(m -> m.getTopic().getTopicId(), Collectors.counting()));
+        return countMap.entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> (double) (e.getValue()) / marks.size()));
+    }
+
+    private void addRating(Map<String, Double> rating, String topicId, Double rate) {
+        rating.putIfAbsent(topicId, 0d);
+        rating.computeIfPresent(topicId, (k, v) -> v + rate);
+    }
 }
