@@ -5,7 +5,9 @@ import org.departure.emerge.app.dto.Mark;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -14,20 +16,30 @@ import java.util.stream.Collectors;
 public class MarkService {
     private final TopicService topicService;
 
-    private List<Mark> allMarks = new ArrayList<>();
+    private List<Mark> allMarks = Collections.synchronizedList(new ArrayList<>());
 
     public Mark createMark(String userId, String sectionId, Long videoTs) {
-        final Mark mark = Mark.builder()
+        final Mark newMark = Mark.builder()
                 .markId(UUID.randomUUID().toString())
                 .userId(userId)
                 .sectionId(sectionId)
                 .videoTimestamp(videoTs)
                 .build();
 
-        topicService.getTopicForMark(mark).ifPresent(mark::setTopic);
+        topicService.getTopicForMark(newMark).ifPresent(newMark::setTopic);
 
-        allMarks.add(mark);
-        return mark;
+        final Optional<Mark> existingMark = allMarks.stream()
+                .filter(m ->
+                        m.getSectionId().equals(newMark.getSectionId())
+                                && m.getUserId().equals(newMark.getUserId())
+                                && m.getVideoTimestamp().equals(newMark.getVideoTimestamp())
+                ).findAny();
+
+        if (existingMark.isEmpty()) {
+            allMarks.add(newMark);
+        }
+
+        return existingMark.orElse(newMark);
     }
 
     public List<Mark> getMarks(String userId, String sectionId) {
