@@ -19,7 +19,7 @@ public class ChatService {
                 .orElseGet(() -> {
                     synchronized (ChatService.class) {
                         final Chat chat = Chat.builder()
-                                .answers(0L)
+                                .answers(2L)
                                 .topicId(topicId)
                                 .chatId(UUID.randomUUID().toString())
                                 .build();

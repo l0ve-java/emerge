@@ -47,3 +47,10 @@ GET http://127.0.0.1:5000/api/login/2345
 GET http://departure-emerge.eu-central-1.elasticbeanstalk.com/api/login/666
 
 ###
+PUT http://127.0.0.1:5000/api/user/P1591477113328/section/tacha/mark
+Content-Type: application/json
+
+{
+  "videoTimestamp": 80
+}
+

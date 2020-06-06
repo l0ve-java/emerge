@@ -58,7 +58,10 @@ public class TopicService {
         }
 
         return allTopics.values().stream()
-                .filter(t -> t.getBegin() <= mark.getVideoTimestamp() && t.getEnd() >= mark.getVideoTimestamp())
+                .filter(t ->
+                        t.getSectionId().equals(mark.getSectionId())
+                                && t.getBegin() <= mark.getVideoTimestamp()
+                                && t.getEnd() >= mark.getVideoTimestamp())
                 .findFirst();
     }
 
