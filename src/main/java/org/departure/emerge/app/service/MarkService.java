@@ -73,12 +73,13 @@ public class MarkService {
         final Optional<Mark> existingMark = allMarks.stream()
                 .filter(m ->
                         m.getSectionId().equals(newMark.getSectionId())
-                                && m.getUserId().equals(newMark.getUserId())
-                                && m.getVideoTimestamp().equals(newMark.getVideoTimestamp())
-                ).findAny();
+                                && m.getUserId().equals(newMark.getUserId()))
+                .findAny();
 
         if (existingMark.isEmpty()) {
             allMarks.add(newMark);
+        } else {
+            existingMark.get().setVideoTimestamp(videoTs);
         }
 
         return existingMark.orElse(newMark);

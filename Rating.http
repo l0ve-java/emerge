@@ -2,7 +2,7 @@ PUT http://127.0.0.1:5000/api/user/alice/section/tacha/mark
 Content-Type: application/json
 
 {
-  "videoTimestamp": 227
+  "videoTimestamp": 230
 }
 
 ###
